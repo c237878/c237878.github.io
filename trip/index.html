@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="font-size: 23.4375px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="always" name="referrer">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>疫情期间行程查询（公测版）</title>
+    <link rel="stylesheet" href="./res/public.css">
+    <link rel="stylesheet" href="./res/index.debug.css">
+    <script type="text/javascript" src="./res/jquery.min.js"></script>
+</head>
+<body>
+    <div class="epidemicQuery-container back">
+        <div class="top-bg back"></div>
+        <div class="fangyi-assistant back" onclick="window.location.href = 'https://shop.10086.cn/zhuanqu/convenientService/index.html?WT.ac_id=20200202AFYBMZQ_017#/';"></div>
+        <div class="inset-shouquan hidden">
+            <div class="inset-desc">
+                <div class="liantong-point back">
+                    <p class="liantong-desc">联通/电信用户查询</p>
+                    <img src="./res/arrow.png" alt="">
+                </div>
+                <div class="inset-sign">
+                    <div class="inset-img back"></div>
+                    <div class="inset-imgActive back hidden"></div>
+                    <div class="inset-tishi">本人同意并授权中国移动查询本人在疫情期间的行程数据。</div>
+                </div>
+                <div class="inset-confim">确认</div>
+            </div>
+        </div>
+        <div class="inset-jieguo hidden">
+            <div class="inset-content">
+                <div class="content-top">
+                    尊敬的
+                    <span class="tel" id="tel"></span>客户
+                </div>
+                <div class="content-center">
+                    <p class="content-desc">根据您的授权查询，您于近15天内：</p>
+                    <div class="content-result">
+                        <div class="nogoArea back hidden">暂未查询到您的行程数据</div>
+                        <p class="goArea hidden"></p>
+                    </div>
+                </div>
+                <p class="content-bottom">
+                    <span class="line"></span>
+                    <span class="desc">抗击疫情，中国移动和您一起努力</span>
+                    <span class="line"></span>
+                </p>
+            </div>
+        </div>
+        <div class="outset-login">
+            <div class="outset-main">
+                <div class="liantong-point">
+                    <p class="liantong-desc">联通/电信用户查询</p>
+                    <img src="./res/arrow.png" alt="">
+                </div>
+                <div class="outset-top">
+                    <input class="telNum" type="tel" placeholder="请输入移动手机号码" maxlength="11">
+                    <div class="outset-code">
+                        <input class="code" type="tel" placeholder="请输入验证码" maxlength="6">
+                        <div class="outset-loginBtn" isclick="1" onclick="yzm();">获取验证码</div>
+                    </div>
+                </div>
+                <div class="outset-fourGLogin hidden">
+                    <p class="fourGLogin-desc">当前查询号码</p>
+                    <p class="fourGLogin-tel"></p>
+                </div>
+                <div class="outset-center">
+                    <div id="imgCheck" class="inset-img back" onclick="check();"></div>
+                    <div class="inset-imgActive back hidden"></div>
+                    <div class="inset-tishi">本人同意并授权中国移动查询本人在疫情期间的行程数据。</div>
+                </div>
+                <div class="outset-bottom" onclick="submit();">确认</div>
+                <div class="switch hidden">
+                    <span class="swithLine"></span>
+                    <span class="switchBtn">切换至其它号码</span>
+                    <span class="swithLine"></span>
+                </div>
+            </div>
+        </div>
+        <p class="rule-prompt">此业务为公益服务，查询用户近30天内的数据，查询结果仅供参考，不作为最终判定依据。</p>
+        <p class="footer back"></p>
+        <div class="popup hidden">
+            <div class="popup-content">
+                <div class="unicom back"></div>
+                <div class="telecom back"></div>
+                <div class="cancel">取消</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var phoneNum = false;
+        var codeNum = false;
+        var checkNum = false;
+        var status = false;
+        var cd = 0;
+        var send = false;
+
+        $(".telNum").on("input propertychange", function () {
+            if ($(".telNum").val().length == 11) {
+                $(".outset-loginBtn").css("background", "linear-gradient(90deg,#3b9cff,#4f78ff)");
+                $(".outset-loginBtn").css("color", "#fff");
+                phoneNum = true;
+            } else {
+                $(".outset-loginBtn").css("background", "#f6f7fa");
+                $(".outset-loginBtn").css("color", "#aaa");
+                phoneNum = false;
+            }
+
+            ready();
+        });
+
+        $(".code").on("input propertychange", function () {
+            if ($(".code").val().length == 6) {
+                codeNum = true;
+            } else {
+                codeNum = false;
+            }
+
+            ready();
+        });
+
+        setInterval(function () {
+            if (cd > 0) {
+                cd = (cd - 1);
+                $(".outset-loginBtn").text(cd + "s");
+            } else if (send) {
+                $(".outset-loginBtn").css("background", "linear-gradient(90deg,#3b9cff,#4f78ff)");
+                $(".outset-loginBtn").css("color", "#fff");
+                $(".outset-loginBtn").text("获取验证码");
+                send = false;
+            }
+        }, 1000);
+
+        function yzm() {
+            if (phoneNum && cd==0) {
+                $(".outset-loginBtn").css("background", "#f6f7fa");
+                $(".outset-loginBtn").css("color", "#aaa");
+                cd = 59;
+                send = true;
+                $(".outset-loginBtn").text(cd + "s");
+            }
+
+            return false;
+        }
+
+        function check() {
+            if ($("#imgCheck").css("background-image").indexOf("noxuanzhong.png") > 0) {
+                $("#imgCheck").css("background-image", "url(images/xuanzhong.png)");
+                checkNum = true;
+            } else {
+                $("#imgCheck").css("background-image", "url(images/noxuanzhong.png)");
+                checkNum = false;
+            }
+
+            ready();
+        };
+
+        function ready() {
+            if (phoneNum && codeNum && checkNum) {
+                $(".outset-bottom").addClass("outset-bottomActive");
+                status = true;
+            } else {
+                $(".outset-bottom").removeClass("outset-bottomActive");
+                status = false;
+            }
+        }
+
+        function submit() {
+            if (status) {
+                window.location.href = "content.html";
+            }
+        }
+    </script>
+</body>
+</html>

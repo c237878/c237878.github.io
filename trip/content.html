@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans" style="font-size: 50px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>疫情期间行程查询（公测版）</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="疫情期间行程查询（公测版）">
+    <link rel="stylesheet" href="./res/mydcxnew.css" type="text/css">
+    <link href="./res/public-headerNew.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="./res/jquery.min.js"></script>
+</head>
+<body style="">
+    <div id="busiArea" class="gridMain">
+        <div class="container" id="container">
+            <input type="hidden" id="time" value="1595214368391">
+            <input type="hidden" id="source" value="jt">
+            <input type="hidden" id="encrptValue" value="CD4FF24069DCAEE8AE984A00505DAEC54BDF663BEC5B2D48F3804DB42A11A871">
+            <div class="result">
+                <h2 class="result__usernumber">尊敬的183****1237客户</h2>
+                <dl class="result__info"><dt>根据您于<span id="timeSpan" style="color:#3e62ff">2020年7月20日 11:06:09</span>的授权查询，您于近14天内：</dt><dd>到达过或途经江苏（常州），上海</dd></dl>
+                <dl class="result__info"><dt>您于近15—30天内：</dt><dd>到达过或途经江苏（常州），上海</dd></dl>
+                <h4 class="result__slogon">抗击疫情，中国移动和您一起努力</h4>
+            </div>
+            <div class="tip">
+                <p>1、此服务为公益服务，提供查询时间范围内的用户返程复工证明数据，查询结果仅供参考，不作为最终判定依据。</p>
+                <p>2、请查询人员注意数据安全。</p>
+                <p>3、请严格遵守《中华人民共和国网络安全法》规定，不得利用本工具提供的数据从事侵害他人名誉、隐私等活动。</p>
+                <p>4、因漫游地运营商延迟传递话单等原因，查询结果中国际及港澳台漫游地区的统计存在一定滞后性，查询结果仅供参考。</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var myDate = new Date();
+        var year = myDate.getFullYear();        //获取当前年
+        var month = myDate.getMonth() + 1;   //获取当前月
+        var date = myDate.getDate();            //获取当前日
+        var h = myDate.getHours();              //获取当前小时数(0-23)
+        var m = myDate.getMinutes();          //获取当前分钟数(0-59)
+        var s = myDate.getSeconds();
+        h = (h < 10 ? "0" + h : "" + h);
+        m = (m < 10 ? "0" + m : "" + m);
+        s = (s < 10 ? "0" + s : "" + s);
+        $("#timeSpan").text(year + "年" + month + "月" + date + "日 " + h + ":" + m + ":" + s);
+    </script>
+</body>
+</html>

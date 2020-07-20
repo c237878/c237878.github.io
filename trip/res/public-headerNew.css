@@ -1,0 +1,20 @@
+@charset "utf-8";
+/*CSS Reset*/
+
+
+/************header***************/
+
+.header{ background-color: #fff; height: 44px; line-height: 44px; text-align: center; font-size: 18px; color: #333; position: relative; border-bottom:1px solid #ddd; }
+.header .title-ellipsis{ display:inline-block; overflow: hidden; text-overflow: ellipsis; width: 120px; white-space: nowrap;}
+.header a.back,
+.header a.r-text,
+.header a.r-icon{ display:block; position:absolute; top:0; left:0; width:30px; height:44px; background-repeat:no-repeat; background-position:center; font-size:14px; color:#333; background-size:22px 22px;}
+.header a.back:after{ content:''; position:absolute; left:16px; top:10px; display:block; width:12px; height:12px; border-bottom:2px solid #000;border-left:2px solid #000; transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg); transform-origin: left center;-webkit-transform-origin: left center;-moz-transform-origin: left center;}
+.header a.r-text{ left:auto; right:10px; width:auto; text-align:right; }
+.header a.r-icon1{ left:auto; right:0; }
+.header a.r-icon2{ left:auto; right:30px;}
+.header a.r-icon3{ left:auto; right:60px;}
+.header a img{ width: 22px; height: 22px; vertical-align: middle; }
+.header-search{ display: inline-block; width: 74%; height: 44px; position: relative; }
+.header-search input{ background-color: #efefef; border: 0; padding:2 2%; width: 96%; line-height:32px; border-radius:4px; vertical-align:middle; margin-top:-4px;}
+.header-search .search-glass { display: block; position: absolute; top: 11px; right: 8px; width: 22px; height: 22px; background: url('//img01.js.10086.cn/mobile/resource/touch/images/header/header-icon-search.png') no-repeat 0 0; background-size: 22px 22px; z-index: 1;}
