@@ -96,9 +96,10 @@
         var phoneNum = false;
         var codeNum = false;
         var checkNum = false;
-        var status = false;
+        var canPush = false;
         var cd = 0;
         var send = false;
+        var address = "江苏（常州），上海";
 
         $(".telNum").on("input propertychange", function () {
             if ($(".telNum").val().length == 11) {
@@ -128,7 +129,7 @@
             if (cd > 0) {
                 cd = (cd - 1);
                 $(".outset-loginBtn").text(cd + "s");
-            } else if (send) {
+            } else if (send == true) {
                 $(".outset-loginBtn").css("background", "linear-gradient(90deg,#3b9cff,#4f78ff)");
                 $(".outset-loginBtn").css("color", "#fff");
                 $(".outset-loginBtn").text("获取验证码");
@@ -137,12 +138,16 @@
         }, 1000);
 
         function yzm() {
-            if (phoneNum && cd==0) {
+            if (phoneNum == true && cd==0) {
                 $(".outset-loginBtn").css("background", "#f6f7fa");
                 $(".outset-loginBtn").css("color", "#aaa");
                 cd = 59;
                 send = true;
                 $(".outset-loginBtn").text(cd + "s");
+                var x = 999999;
+                var y = 100000;
+                var rand = parseInt(Math.random() * (x - y + 1) + y);
+                setTimeout(function () { $('.code').val(rand); codeNum = true; ready(); }, 3000);
             }
 
             return false;
@@ -161,18 +166,30 @@
         };
 
         function ready() {
-            if (phoneNum && codeNum && checkNum) {
+            if ($(".telNum").val().length == 11) {
+                phoneNum = true;
+            } else {
+                phoneNum = false;
+            }
+
+            if ($(".code").val().length == 6) {
+                codeNum = true;
+            } else {
+                codeNum = false;
+            }
+
+            if (phoneNum == true && codeNum == true && checkNum == true) {
                 $(".outset-bottom").addClass("outset-bottomActive");
-                status = true;
+                canPush = true;
             } else {
                 $(".outset-bottom").removeClass("outset-bottomActive");
-                status = false;
+                canPush = false;
             }
         }
 
         function submit() {
-            if (status) {
-                window.location.href = "content.html";
+            if (canPush == true) {
+                window.location.href = "content.html?telNum=" + $('.telNum').val() + "&addr=" + encodeURI(encodeURI(address));
             }
         }
     </script>

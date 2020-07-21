@@ -20,9 +20,9 @@
             <input type="hidden" id="source" value="jt">
             <input type="hidden" id="encrptValue" value="CD4FF24069DCAEE8AE984A00505DAEC54BDF663BEC5B2D48F3804DB42A11A871">
             <div class="result">
-                <h2 class="result__usernumber">尊敬的183****1237客户</h2>
-                <dl class="result__info"><dt>根据您于<span id="timeSpan" style="color:#3e62ff">2020年7月20日 11:06:09</span>的授权查询，您于近14天内：</dt><dd>到达过或途经江苏（常州），上海</dd></dl>
-                <dl class="result__info"><dt>您于近15—30天内：</dt><dd>到达过或途经江苏（常州），上海</dd></dl>
+                <h2 class="result__usernumber">尊敬的<span class="telNum"></span>客户</h2>
+                <dl class="result__info"><dt>根据您于<span id="timeSpan" style="color:#3e62ff">2020年7月20日 11:06:09</span>的授权查询，您于近14天内：</dt><dd>到达过或途经<span class="addr"></span></dd></dl>
+                <dl class="result__info"><dt>您于近15—30天内：</dt><dd>到达过或途经<span class="addr"></span></dd></dl>
                 <h4 class="result__slogon">抗击疫情，中国移动和您一起努力</h4>
             </div>
             <div class="tip">
@@ -45,6 +45,20 @@
         m = (m < 10 ? "0" + m : "" + m);
         s = (s < 10 ? "0" + s : "" + s);
         $("#timeSpan").text(year + "年" + month + "月" + date + "日 " + h + ":" + m + ":" + s);
+
+        var telNum = getUrlParam("telNum");
+        telNum = (telNum.substr(0, 3) + "****" + telNum.substr(7,4));
+        $('.telNum').text(telNum);
+        var address = getUrlParam("addr");
+        address = (address ? decodeURI(address) : "江苏（常州），上海");
+        $('.addr').text(address);
+
+        // 获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
     </script>
 </body>
 </html>
