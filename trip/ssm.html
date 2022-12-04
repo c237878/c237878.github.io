@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>随申码</title>
+    <meta name="ROBOTS" content="none">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <!--清除浏览器缓存-->
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+    <!--iPhone 手机上设置手机号码不被显示为拨号链接）-->
+    <meta content="telephone=no, address=no" name="format-detection">
+    <!--IOS私有属性，添加到主屏幕后，全屏显示-->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!--IOS私有属性，可以添加到主屏幕-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--IOS私有属性，系统顶栏的颜色(content = default-白色、black-黑色 和 black-translucent-灰色半透明)选其一就可以 -->
+    <!--<meta name="apple-mobile-web-app-status-bar-style" content="default">-->
+    <!--IOS私有属性，添加到移动设备主屏幕图标-->
+    <link rel="apple-touch-icon-precomposed" href="images/ssm/touch-icon.png">
+    <!--强制竖屏-->
+    <meta name="x5-orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <script src="res/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no , viewport-fit=cover">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            /*background: -webkit-gradient(linear, left center, right center, from(#D5C498), to(#C2AD80));
+            background: -moz-linear-gradient(left,#D5C498,#C2AD80);
+            background: -o-linear-gradient(left,#D5C498,#C2AD80);*/
+            background: url(images/ssm/bg.png) no-repeat;
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            /*background: -webkit-gradient(linear, left center, right center, from(#D5C498), to(#C2AD80));
+            background: -moz-linear-gradient(left,#D5C498,#C2AD80);
+            background: -o-linear-gradient(left,#D5C498,#C2AD80);*/
+            overflow: scroll;
+        }
+
+            .container .head {
+                width: 100%;
+                height: 50px;
+                position: absolute;
+            }
+
+                .container .head img {
+                    width: 100%;
+                    height: 50px;
+                }
+
+            .container .content {
+                margin: 0 auto;
+                padding: 50px 18px 0px 18px;
+            }
+
+                .container .content .main img {
+                    width: 100%;
+                }
+
+                .container .content .main .time {
+                    position: relative;
+                    width: 339px;
+                    top: -389px;
+                    text-align: center;
+                    font-family: '黑体';
+                }
+
+                    .container .content .main .time p {
+                        font-size: 14px;
+                    }
+
+                        .container .content .main .time p span {
+                            font-size: 20px;
+                            font-weight: bold;
+                        }
+
+                .container .content .main .date {
+                    position: relative;
+                    width: 339px;
+                    top: -100px;
+                    text-align: center;
+                    font-family: '黑体';
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+
+                    .container .content .main .date .day {
+                        font-size: 42px;
+                        font-weight: bold;
+                    }
+
+                    .container .content .main .date .hour {
+                        color: #55B970;
+                        margin-right: 5px;
+                    }
+
+                .container .content .sub {
+                    margin-top: -78px;
+                }
+
+                    .container .content .sub img {
+                        width: 100%;
+                    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <img src="images/ssm/head.png" />
+        </div>
+        <div class="content">
+            <div class="main">
+                <img src="images/ssm/conten1.png" />
+                <div class="time">
+                    <p><span></span></p>
+                </div>
+                <div class="date">
+                    <p><span class="day hour">24</span>小时内核酸检测结果<span style="color:#55B970; margin-left:-5px;">【阴性】</span></p>
+                    <!--<p><span class="day">14</span>天内未有核酸检测结果</p>-->
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="sub">
+                <img src="images/ssm/conten2.png" />
+                <!--<img src="images/ssm/conten2.png" onclick="goto('xcm-new.html', '18351211237', '上海市*(注:*表示当前该城市存在中风险或高风险地区，并不表示用户实际到访过这些中高风险地区。)');" />-->
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURI(r[2]); return null;
+            };
+
+            var phone = $.getUrlParam('phone');
+
+            showTime();
+            var t = setInterval(function () {
+                showTime();
+            }, 1000);
+
+            //alert($('.main').css('width'));
+        })
+
+        function Appendzero(obj) {
+            if (obj < 10) return "0" + obj; else return obj;
+        }
+
+        function showTime() {
+            var myDate = new Date;
+            var year = myDate.getFullYear(); //获取当前年
+            var mon = myDate.getMonth() + 1; //获取当前月
+            var date = myDate.getDate(); //获取当前日
+            var h = myDate.getHours();//获取当前小时数(0-23)
+            var m = myDate.getMinutes();//获取当前分钟数(0-59)
+            var s = myDate.getSeconds();//获取当前秒
+            $('.time p').html(year + "-" + Appendzero(mon) + "-" + Appendzero(date) + " " + Appendzero(h) + ":" + Appendzero(m) + ":" + "<span>" + Appendzero(s) + "</span>");
+            //$('.time p').html("2022-06-09 10:31:<span>11</span>");
+        }
+
+        function goto(url, phone, addr) {
+            window.location.href = url + "?phone=" + phone + "&addr=" + addr;
+        }
+    </script>
+</body>
+</html>

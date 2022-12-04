@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>通信行程卡</title>
+    <meta name="ROBOTS" content="none">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <!--清除浏览器缓存-->
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+    <!--iPhone 手机上设置手机号码不被显示为拨号链接）-->
+    <meta content="telephone=no, address=no" name="format-detection">
+    <!--IOS私有属性，添加到主屏幕后，全屏显示-->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!--IOS私有属性，可以添加到主屏幕-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--IOS私有属性，系统顶栏的颜色(content = default-白色、black-黑色 和 black-translucent-灰色半透明)选其一就可以 -->
+    <!--<meta name="apple-mobile-web-app-status-bar-style" content="default">-->
+    <!--IOS私有属性，添加到移动设备主屏幕图标-->
+    <link rel="apple-touch-icon-precomposed" href="images/touch-icon.png">
+    <!--强制竖屏-->
+    <meta name="x5-orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <script src="res/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no , viewport-fit=cover">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            overflow: scroll;
+        }
+
+        .head {
+            position: fixed;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+            .head .back {
+                background: url(images/back.png) no-repeat;
+                background-size: 100% 100%;
+                height: 17px;
+                position: absolute;
+                left: 15px;
+                width: 10px;
+                top: 13px;
+            }
+
+            .head .button {
+                background: url(images/button.png) no-repeat;
+                background-size: 100% 100%;
+                width: 85px;
+                height: 30px;
+                position: absolute;
+                right: 10px;
+                top: 6px;
+                border: 1px solid rgba(0,0,0,.1);
+                border-radius: 30px;
+                background-color: rgba(255,255,255,.6);
+            }
+
+            .head .title {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                font-size: 16px;
+                font-weight: bolder;
+            }
+
+        .foot {
+            background-color: #F8F8F8;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .body {
+            background-color: #47a566;
+            height: 100%;
+            overflow: hidden;
+        }
+
+            .body .tag1 {
+                width: 100%;
+            }
+
+            .body .tag2 {
+                width: 100%;
+                height: 130px;
+                background: url(images/tag2.png);
+                background-size: 100% 100%;
+                margin-top: 4px;
+            }
+
+            .body .content {
+                width: 320px;
+                margin: 0 auto;
+                border-radius: 13px;
+                background: url(images/tag3.png) no-repeat;
+                background-color: #FFFFFF;
+                background-size: 100% 32px;
+                overflow: hidden;
+                padding-bottom: 15px;
+                margin-top: -70px
+            }
+
+        @keyframes scaleDraw {
+            /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+            0% {
+                transform: scale(1);
+                /*开始为原始大小*/
+            }
+
+            25% {
+                transform: scale(1.1);
+                /*放大1.1倍*/
+            }
+
+            50% {
+                transform: scale(1);
+            }
+
+            75% {
+                transform: scale(1.1);
+            }
+        }
+
+        .body .content .logo {
+            -webkit-animation-name: scaleDraw;
+            /*关键帧名称*/
+            -webkit-animation-timing-function: ease-in-out;
+            /*动画的速度曲线*/
+            -webkit-animation-iteration-count: infinite;
+            /*动画播放的次数*/
+            -webkit-animation-duration: 2.8s;
+            /*动画所花费的时间*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="head" style="width:100%;">
+            <div class="back"></div>
+            <div class="title">
+                <span onclick="showTime();">通信行程卡</span>
+            </div>
+            <div class="button"></div>
+        </div>
+        <div class="body">
+            <div class="tag1">
+                <img style="width: 100%;" src="/images/cj-hu/tag1.png"/>
+            </div>
+            <div class="content">
+                <div style="font-size: 14px; color: #47a666; font-weight: bold; text-align: center; margin-top: 5px;">请收下绿色行程卡</div>
+                <div id="phone" style="font-size: 16px; font-weight: bold; text-align: center; margin-top: 25px;">183****1237的动态行程卡</div>
+                <div style="font-size: 14px; text-align: center; margin-top: 14px; color: #939393;">更新于：<span id="time">2021.08.04 10:48:16</span></div>
+                <div style="width:149px;height:149px;margin: 18px auto;overflow:hidden;">
+                    <img class="logo" src="images/logo.png" alt="" style="width:135px;height:135px;margin: 6px;" />
+                </div>
+                <div style="background-color: #e4e4e4; width: 288px; height: 1px; margin: 0 auto;margin-top: 40px;"></div>
+                <div style="font-size: 14px; text-align: left; color: #939393; width: 288px; margin: 0 auto; margin-top: 14px; line-height: 20px;">您于前14天内到达或途经：<span id="addr" style="color:#000000; font-weight:bold;">江苏省常州市,上海市</span></div>
+            </div>
+            <div class="tag2"></div>
+        </div>
+        <div class="foot" style="width:100%;">
+            <img style="width:100%;" src="/images/cj-hu/footer.png"/>
+        </div>
+    </div>
+    <script>
+        var iPhoneWidth = 750;
+        var iPhoneHeight = 1334;
+
+        $(function () {
+            $.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURI(r[2]); return null;
+            };
+
+            $('.container div').each(function () {
+                if ($(this).attr('width')) {
+                    $(this).css('width', $(this).attr('width') * 100 / iPhoneWidth + "%");
+                }
+                if ($(this).attr('height')) {
+                    $(this).css('height', '45px');
+                }
+
+                $('.head .title span').css('line-height', '45px');
+                $('.body').css('margin-top', '45px');
+            });
+
+            showTime();
+
+            var phone = $.getUrlParam('phone');
+            var addr = $.getUrlParam('addr');
+
+            if (phone) {
+                phone = phone.substr(0, 3) + "****" + phone.substr(7);
+                $('#phone').text(phone +"的动态行程卡");
+            }
+            if (addr) {
+                $('#addr').text(addr);
+            }
+        })
+
+        function Appendzero(obj) {
+            if (obj < 10) return "0" + obj; else return obj;
+        }
+
+        function showTime(){
+            var myDate = new Date;
+            var year = myDate.getFullYear(); //获取当前年
+            var mon = myDate.getMonth() + 1; //获取当前月
+            var date = myDate.getDate(); //获取当前日
+            var h = myDate.getHours();//获取当前小时数(0-23)
+            var m = myDate.getMinutes();//获取当前分钟数(0-59)
+            var s = myDate.getSeconds();//获取当前秒
+            $('#time').text(year + "." + Appendzero(mon) + "." + Appendzero(date) + " " + Appendzero(h) + ":" + Appendzero(m) + ":" + Appendzero(s));
+        }
+    </script>
+</body>
+</html>

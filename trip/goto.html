@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!--强制竖屏-->
+    <meta name="x5-orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <script src="res/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no , viewport-fit=cover">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .option {
+            /*用div的样式代替select的样式*/
+            margin: 100px;
+            width: 140px;
+            height: 40px;
+            /*border-radius: 5px;*/
+            /*盒子阴影修饰作用,自己随意*/
+            /* box-shadow: 0 0 5px #ccc;*/
+            border: 1px solid #cccccc;
+            position: relative;
+        }
+
+            .option select {
+                /*清除select的边框样式*/
+                border: none;
+                /*清除select聚焦时候的边框颜色*/
+                outline: none;
+                /*将select的宽高等于div的宽高*/
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+                /*隐藏select的下拉图标*/
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                /*通过padding-left的值让文字居中*/
+                padding-left: 20px;
+            }
+            /*使用伪类给select添加自己想用的图标*/
+            .option:after {
+                content: "";
+                width: 14px;
+                height: 8px;
+                background: url(../assets/arrow-down.png) no-repeat center;
+                /*通过定位将图标放在合适的位置*/
+                position: absolute;
+                right: 20px;
+                top: 41%;
+                /*给自定义的图标实现点击下来功能*/
+                pointer-events: none;
+            }
+    </style>
+</head>
+<body>
+    <div>
+        <div style="margin: 20px auto;text-align:center;">
+            <select id="data" multiple="multiple" size="5" style="width: 222px;" onchange="dataChange();">
+                <option>江苏省苏州市</option>
+                <option>江苏省常州市*(注:*表示当前该城市存在中风险或高风险地区，并不表示用户实际到访过这些中高风险地区。)</option>
+                <option>江苏省常州市</option>
+                <option>江苏省无锡市</option>
+                <option>上海市</option>
+                <option>上海市*(注:*表示当前该城市存在中风险或高风险地区，并不表示用户实际到访过这些中高风险地区。)</option>
+            </select>
+        </div>
+        <div style="margin: 20px auto;text-align:center;">
+            <select id="version" size="5" style="width: 222px;">
+                <option value="xcm-new.html" selected="selected">普通版</option>
+                <option value="xcm-cj-hu.html">春节版</option>
+            </select>
+        </div>
+        <div style="margin: 20px auto;text-align:center;"><input id="phone" type="tel" placeholder="手机号" style="border: 1px solid gray; width: 200px; height: 30px; padding: 0px 10px; border-radius: 10px;font-size:14px;" value="18351211237" /></div>
+        <div style="margin: 20px auto;text-align:center;"><textarea id="addr" rows="5" cols="1" placeholder="地址" style=" border: 1px solid gray; width: 200px; height: 75px; padding: 5px 10px; border-radius: 10px; font-size: 14px;">上海市*(注:*表示当前该城市存在中风险或高风险地区，并不表示用户实际到访过这些中高风险地区。)</textarea></div>
+        <div style="width: 85px; height: 30px; border: 1px solid #d3d3d3; border-radius: 30px; text-align: center; line-height: 30px; cursor: pointer; margin: 20px auto;" onclick="goto();">确定</div>
+        <div style="width: 85px; height: 30px; border: 1px solid #d3d3d3; border-radius: 30px; text-align: center; line-height: 30px; cursor: pointer; margin: 20px auto;" onclick="ssm();">随申码</div>
+        <div style="margin: 20px auto;text-align:center;">
+            <select id="address" size="5" style="width: 222px;">
+                <option selected="selected">上海火车站</option>
+                <option>日月光总部</option>
+                <option>广兰路站</option>
+                <option>天之骄子</option>
+                <option>其它</option>
+            </select>
+        </div>
+        <div style="margin: 20px auto;text-align:center;">
+            <input id="address_1" type="text" placeholder="自定义地址" style="border: 1px solid gray; width: 200px; height: 30px; padding: 0px 10px; border-radius: 10px; font-size: 14px;"/>
+            <input id="address_2" type="text" placeholder="自定义详细地址" style="border: 1px solid gray; width: 200px; height: 30px; padding: 0px 10px; border-radius: 10px; font-size: 14px;" />
+        </div>
+        <div style="width: 85px; height: 30px; border: 1px solid #d3d3d3; border-radius: 30px; text-align: center; line-height: 30px; cursor: pointer; margin: 20px auto;" onclick="csm();">场所码</div>
+    </div>
+    <script>
+        function goto() {
+            var phone = $('#phone').val();
+            var addr = encodeURI($('#addr').val());
+            var url = $('#version').val();
+            window.location.href = url + "?phone=" + phone + "&addr=" + addr;
+        }
+
+        function dataChange() {
+            var addr = "";
+            $('#data option:selected').each(function () {
+                addr = addr + $(this).text() + ",";
+            });
+            addr = addr.substr(0, addr.length - 1);
+            $('#addr').val(addr);
+        }
+
+        function ssm() {
+            window.location.href = "ssm.html";
+        }
+
+        function csm() {
+            if ($('#address').val() != '其它') {
+                window.location.href = "csm.html?addr=" + $('#address').val();
+            } else {
+                window.location.href = "csm.html?main=" + $('#address_1').val() + "&sub=" + $('#address_2').val();
+            }
+        }
+    </script>
+</body>
+</html>
