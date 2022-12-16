@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>陕西一码通</title>
+    <meta name="ROBOTS" content="none">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <!--清除浏览器缓存-->
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+    <!--iPhone 手机上设置手机号码不被显示为拨号链接）-->
+    <meta content="telephone=no, address=no" name="format-detection">
+    <!--IOS私有属性，添加到主屏幕后，全屏显示-->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!--IOS私有属性，可以添加到主屏幕-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--IOS私有属性，系统顶栏的颜色(content = default-白色、black-黑色 和 black-translucent-灰色半透明)选其一就可以 -->
+    <!--<meta name="apple-mobile-web-app-status-bar-style" content="default">-->
+    <!--IOS私有属性，添加到移动设备主屏幕图标-->
+    <link rel="apple-touch-icon-precomposed" href="images/ssm/touch-icon.png">
+    <!--强制竖屏-->
+    <meta name="x5-orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <script src="res/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no , viewport-fit=cover">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            /*background: -webkit-gradient(linear, left center, right center, from(#D5C498), to(#C2AD80));
+            background: -moz-linear-gradient(left,#D5C498,#C2AD80);
+            background: -o-linear-gradient(left,#D5C498,#C2AD80);*/
+            background-color: #000;
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+
+        .app {
+            width: 390px;
+            height: 100%;
+            max-height: 866.67px;
+            margin: 0 auto;
+            background-color: #F7F7F7;
+            overflow: hidden;
+        }
+
+            .app .head {
+                width: 390px;
+                height: 78px;
+                background: url(images/sxymt/head.jpg) no-repeat;
+                background-size: 100% 100%;
+            }
+
+                .app .head .time {
+                    color: #fff;
+                    font-size: 12px;
+                    float: right;
+                    margin-right: 25px;
+                    margin-top: 9px;
+                }
+
+            .app .foot {
+                width: 390px;
+                height: 63.92px;
+                background: url(images/sxymt/foot.jpg) no-repeat;
+                background-size: 100% 100%;
+            }
+
+            .app .content::-webkit-scrollbar {
+                display: none;
+            }
+
+            .app .content {
+                width: 390px;
+                height: calc(100% - 141.91px);
+                overflow-y: auto;
+            }
+
+                .app .content .valid {
+                    width: 390px;
+                    height: 179.11px;
+                    background: url(images/sxymt/valid.jpg) no-repeat;
+                    background-size: 100% 100%;
+                    margin-bottom: 5px;
+                }
+
+                .app .content .card {
+                    width: 362px;
+                    height: 241.45px;
+                    background: url(images/sxymt/card.jpg) no-repeat;
+                    background-size: 100% 100%;
+                    margin: 0 auto;
+                    margin-bottom: 8px;
+                }
+
+                    .app .content .card .info {
+                        margin-left: 102px;
+                        width: 143px;
+                        height: 132px;
+                        overflow: hidden;
+                    }
+
+                        .app .content .card .info .nick {
+                            margin-top: 20px;
+                            font-size: 16px;
+                        }
+
+                        .app .content .card .info .status {
+                            margin-top: 15px;
+                            font-size: 16px;
+                        }
+
+                        .app .content .card .info .cardno {
+                            margin-top: 15px;
+                            font-size: 16.4px;
+                        }
+
+                    .app .content .card .result {
+                        margin-left: 85px;
+                        width: 132px;
+                        height: 106px;
+                        overflow: hidden;
+                        color: #c3c3c3;
+                    }
+
+                        .app .content .card .result .begintime {
+                            font-size: 13px;
+                            margin-top: 20px;
+                        }
+
+                        .app .content .card .result .endtime {
+                            font-size: 13px;
+                            margin-top: 9px;
+                        }
+
+                        .app .content .card .result .hospital {
+                            font-size: 14px;
+                            margin-top: 7px;
+                        }
+
+                .app .content .block1 {
+                    width: 362px;
+                    height: 60px;
+                    border-radius: 10px;
+                    background-color: #FFF;
+                    margin: 0 auto;
+                    margin-bottom: 8px;
+                    text-align: center;
+                    line-height: 60px;
+                    font-size: 14px;
+                    color: #00aae8;
+                    cursor: pointer;
+                }
+
+                .app .content .block2 {
+                    width: 362px;
+                    height: 50px;
+                    border-radius: 10px;
+                    background-color: #FFF;
+                    margin: 0 auto;
+                    margin-bottom: 8px;
+                    text-align: center;
+                    line-height: 50px;
+                    font-size: 16.5px;
+                    cursor: pointer;
+                }
+
+                .app .content .history {
+                    display: none;
+                }
+
+                .app .content .tag {
+                    text-align: center;
+                    color: #c3c3c3;
+                    font-size: 12px;
+                    margin-top: 10px;
+                    margin-bottom: 235px;
+                }
+
+        .icon-down {
+            display: inline-block;
+            width: 16px;
+            height: 14px;
+            background: url(images/sxymt/down.png) no-repeat;
+            background-size: 16px 10px;
+            background-position: center center;
+            margin-left: 5px;
+        }
+
+        .icon-up {
+            display: inline-block;
+            width: 16px;
+            height: 14px;
+            background: url(images/sxymt/up.png) no-repeat;
+            background-size: 16px 10px;
+            background-position: center center;
+            margin-left: 5px;
+        }
+
+        .green {
+            color: #00ac91;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="head">
+            <div class="time"></div>
+        </div>
+        <div id="content" class="content">
+            <div class="valid"></div>
+            <div class="card">
+                <div class="info">
+                    <div class="nick">常*瑞</div>
+                    <div class="status">本人</div>
+                    <div class="cardno">6***************22</div>
+                </div>
+                <div class="result">
+                    <div class="begintime">2022-12-07 06:47:32</div>
+                    <div class="endtime">2022-12-07 23:58:20</div>
+                    <div class="hospital">韩城交大医院</div>
+                </div>
+            </div>
+            <div class="block1">
+                <span>查询外省市核酸检测结果并上传陕西一码通</span>
+            </div>
+            <div class="block2" onclick="history();">
+                <span>近14天全部核酸检测结果<i class="icon-down"></i></span>
+            </div>
+            <div class="history">
+            </div>
+            <div class="tag">
+                <p>核酸和抗体检测数据在不断汇聚和完善中</p>
+                <p>查询结果仅供参考</p>
+            </div>
+        </div>
+        <div class="foot"></div>
+    </div>
+    <script>
+        var curTime = new Date();
+        $('.app .head .time').text(pad(curTime.getHours(), 2) + ':' + pad(curTime.getMinutes(), 2));
+
+        function pad(num, cover) {
+            return String('0'.repeat(cover) + num).slice(-cover);
+        }
+
+        function history() {
+            if ($('.icon-up').length > 0) {
+                $('.history').hide();
+                $('.block2').removeClass('green');
+                $('.block2 span i').removeClass('icon-up');
+                $('.block2 span i').addClass('icon-down');
+            } else {
+                $('.block2 span i').removeClass('icon-down');
+                $('.block2 span i').addClass('icon-up');
+                $('.block2').addClass('green');
+                $('.history').show();
+            }
+        }
+
+        $.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURI(r[2]); return null;
+        };
+
+        var nick = $.getUrlParam('nick');
+        var cardno = $.getUrlParam('cardno');
+        var log = $.getUrlParam('log');
+        var htmlStr = '';
+        if (nick != undefined && cardno != undefined) {
+            $('.app .content .card .info .nick').text(nick);
+            $('.app .content .card .info .cardno').text(cardno);
+            $.each(log.split('|'), function (i, item) {
+                if (item != undefined && item != '') {
+                    if (i == 0) {
+                        $('.app .content .card .result .begintime').text(item.split(',')[0]);
+                        $('.app .content .card .result .endtime').text(item.split(',')[1]);
+                        $('.app .content .card .result .hospital').text(item.split(',')[2]);
+                    } else {
+                        htmlStr += '<div class="card"><div class="info"><div class="nick">' + nick + '</div><div class="status">本人</div><div class="cardno">' + cardno + '</div></div><div class="result"><div class="begintime">' + item.split(',')[0] + '</div><div class="endtime">' + item.split(',')[1] + '</div><div class="hospital">' + item.split(',')[2] + '</div></div></div>';
+                    }
+                }
+            });
+            $('.history').html(htmlStr);
+        }
+    </script>
+</body>
+</html>
